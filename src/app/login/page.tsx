@@ -9,6 +9,7 @@ import { ACCESS_TOKEN } from "../../../infra/const"
 import { UserActionType } from "../../../types/interfaces"
 import { GoogleLogin } from "@react-oauth/google"
 import { useNotifier } from "../../../context/notifyContext"
+import Image from "next/image"
 
 
 interface ITokens {
@@ -92,6 +93,7 @@ export default function Login() {
                 console.log('Login Failed');
             }}
         />;
+
       </div>
     )
   }
