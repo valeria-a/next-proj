@@ -7,6 +7,21 @@ import axios from "axios";
 import { USER_DATA_URL } from "../../infra/urls";
 import { UserActionType } from "../../types/interfaces";
 
+// Add a request interceptor
+axios.interceptors.request.use(function (config) {
+    console.log('inside interceptors', config)
+    if (config.url?.includes('amazonaws')) {
+        return config
+    }
+    // Do something before request is sent
+    const token = localStorage.getItem(ACCESS_TOKEN)
+    config.headers.Authorization = `Bearer ${token}`
+    return config;
+  }, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+  });
+
 export default function App({children}:{children: ReactNode}) {
 
     const authDispatch = useAuthDispatch()
@@ -20,7 +35,7 @@ export default function App({children}:{children: ReactNode}) {
                 try{
                     const response = await axios.get(
                         USER_DATA_URL, 
-                        {headers: {Authorization: `Bearer ${token}`}}
+                        // {headers: {Authorization: `Bearer ${token}`}}
                     )
                     authDispatch({type: UserActionType.Login, context: response.data})
                 } catch (error) {
@@ -36,7 +51,6 @@ export default function App({children}:{children: ReactNode}) {
 
         <div>
 
-            <h2>App component</h2>
             {children}
 
         </div>
