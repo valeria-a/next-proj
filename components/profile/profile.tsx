@@ -60,7 +60,7 @@ export default function Profile() {
                 ...response.data.fields,
                 file: selectedFile
             },
-            
+
             {headers: {
                 "Content-Type": 'multipart/form-data'
             },
@@ -122,7 +122,7 @@ export default function Profile() {
         </Button>
         
         <br />
-        {inFlight > 0 &&
+        {inFlight &&
             <LinearProgress variant="determinate" value={progress} />
         }
       </div>
