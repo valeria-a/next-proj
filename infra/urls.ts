@@ -1,4 +1,4 @@
-const BASE_URL: string = 'http://127.0.0.1:8000/api'
+const BASE_URL: string | undefined = `http://${process.env.NEXT_PUBLIC_API_URL ?? "localhost:3000"}/api`
 
 
 //Auth

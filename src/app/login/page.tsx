@@ -35,6 +35,7 @@ export default function Login() {
         e.preventDefault()
 
         try {
+            console.log('login', LOGIN_URL)
             let response = await axios.post(LOGIN_URL, {username: email, password})
             // const tokens: {access: string, refresh: string} = response.data;
             const tokens: ITokens = response.data;
